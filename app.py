@@ -72,7 +72,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    st.session_state.attempts = 0
+    st.session_state.attempts = 1 #Should start at 1 to allow a proper new game to start
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
     st.rerun()
