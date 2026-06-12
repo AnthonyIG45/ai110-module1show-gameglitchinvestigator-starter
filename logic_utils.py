@@ -28,20 +28,12 @@ def parse_guess(raw: str):
 
 def check_guess(guess, secret):
     if guess == secret:
-        return "Win"
+        return "Win", "🎉 Correct!"
 
-    try:
-        if guess > secret:
-            return "Too High"
-        else:
-            return "Too Low"
-    except TypeError:
-        g = str(guess)
-        if g == secret:
-            return "Win"
-        if g > secret:
-            return "Too High"
-        return "Too Low"
+    if guess > secret:
+        return "Too High", "📉 Go LOWER!"
+    else:
+        return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):

@@ -18,8 +18,8 @@ difficulty = st.sidebar.selectbox(
 )
 
 attempt_limit_map = {
-    "Easy": 6,
-    "Normal": 8,
+    "Easy": 10,
+    "Normal": 7,
     "Hard": 5,
 }
 attempt_limit = attempt_limit_map[difficulty]
@@ -33,7 +33,7 @@ if "secret" not in st.session_state:
     st.session_state.secret = random.randint(low, high)
 
 if "attempts" not in st.session_state:
-    st.session_state.attempts = 1
+    st.session_state.attempts = 0
 
 if "score" not in st.session_state:
     st.session_state.score = 0
@@ -72,7 +72,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
-    st.session_state.attempts = 1 #Should start at 1 to allow a proper new game to start
+    st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
     st.rerun()
@@ -95,12 +95,7 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
-
-        outcome, message = check_guess(guess_int, secret)
+        outcome, message = check_guess(guess_int, st.session_state.secret)
 
         if show_hint:
             st.warning(message)

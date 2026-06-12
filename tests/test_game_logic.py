@@ -14,3 +14,18 @@ def test_guess_too_low():
     # If secret is 50 and guess is 40, hint should be "Too Low"
     result = check_guess(40, 50)
     assert result == "Too Low"
+
+
+# Including my own test for even attempt type error
+
+def test_guess_matches_string_secret():
+    result = check_guess(50, "50")
+    assert result == "Win"
+
+def test_too_high_with_string_secret():
+    result = check_guess(60, "50")
+    assert result == "Too High"
+
+def test_too_low_with_string_secret():
+    result = check_guess(40, "50")
+    assert result == "Too Low"
