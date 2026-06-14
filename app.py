@@ -19,6 +19,19 @@ difficulty = st.sidebar.selectbox(
     index=1,
 )
 
+if "current_difficulty" not in st.session_state:
+    st.session_state.current_difficulty = difficulty
+
+if st.session_state.current_difficulty != difficulty:
+    st.session_state.current_difficulty = difficulty
+    low, high = get_range_for_difficulty(difficulty)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.attempts = 0
+    st.session_state.status = "playing"
+    st.session_state.history = []
+    st.session_state.previous_outcome = None
+    st.rerun()
+
 attempt_limit_map = {
     "Easy": 10,
     "Normal": 7,
@@ -63,12 +76,11 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
-raw_guess = st.text_input(
-    "Enter your guess:",
-    key=f"guess_input_{difficulty}"
-)
-
 with st.form (key = "game_panel", clear_on_submit=True):
+    raw_guess = st.text_input(
+        "Enter your guess:",
+        key=f"guess_input_{difficulty}"
+    )
 
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -82,7 +94,7 @@ with st.form (key = "game_panel", clear_on_submit=True):
 
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
     st.success("New game started.")
     st.session_state.status = "playing"
     st.rerun()
