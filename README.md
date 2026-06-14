@@ -25,9 +25,23 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- Games purpose is to generate a random number and have the user guess it with a set amount of guesses while being provided hints. Multiple difficulties with point amounts.
+
+- Bugs Found:
+   1. Issue with type conversion when checking guess to secret.
+   2. All logic and UI code in app.py, need to seperate logic and refactor (not much of a bug but a coding courtesy)
+   3. Points did not add properly or make sense
+   4. Did not properly restart when pressing "New Game"
+   5. Changing the difficulty literally does nothing
+   6. Hints are backward and don't really work in general
+
+- Fixes Applied:
+   1. Normalize types making sure that guess and secret are always tried as ints regardless of the input variable type.
+   2. Refactored code and separated logic (UI and Game Logic)
+   3. Adjusted points to multiply based off difficulty chosen and based off consecutive guesses (Double too high/low gives deficit while consecutive inverse guess types nuetralize point loss)
+   4. New game actually properly reruns the game. Adjusted initial attempt from 1 to 0, fixed UI issue too with -1 attempt showing if you lose
+   5. Difficulty now reruns everything when swapped and the difficulty parameters are actually applied
+   6. Hints now show if you are below the secret number, above the secret, or if you win or lose (run out of attempts)
 
 ## 📸 Demo Walkthrough
 
@@ -59,3 +73,4 @@ tests\test_game_logic.py ...............                                        
 ## 🚀 Stretch Features
 
 - I added the st.form for the submission box for inputs. Easier on the user for submitting answers to then be able to submit their next choice.
+- Added a point multiplier for winning based off the difficulty the user is on.

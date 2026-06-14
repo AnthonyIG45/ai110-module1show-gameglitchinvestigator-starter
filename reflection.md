@@ -78,5 +78,17 @@ Document at least 3 bugs you found. Add rows as needed.
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+
+  + Definitely asking the AI more focused questions instead of open ended ones that have it inspecting large gaps of code at once to make changes. Sometimes it is helpful especially if it needs context,
+  + but the majority of the time it just made following the AI's train of though difficult.
+
 - What is one thing you would do differently next time you work with AI on a coding task?
+
+  + I would wait until I've inspected the code and truly understood what the initial train of thought was before asking AI to do things. Especially if I'm looking at code that I did not personally create,
+  + and code that I am able to actively run to view things working improperly. It is nice to identify where in the code the problem is occuring for my self to then loop back to the strategy I talked
+  + about using near the middle and end of the project in part 1 of this question.
+
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+  + I definitely know not to 100% rely on AI code at face value. I also know that more context and personal wants in my prompts lead to a more tailored and workable output. Too vauge can lead to messy code
+  + that has properties that I may not want in it or logic that is significantly more complex than it needs to be.
