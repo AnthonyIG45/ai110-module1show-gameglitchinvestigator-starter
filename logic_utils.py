@@ -29,10 +29,13 @@ def parse_guess(raw: str):
 #FIXED: Logic now properly displays Higher or Lower
 
 def check_guess(guess, secret):
-    if guess == secret:
+    secret_int = int(secret)
+    guess_int = int(guess)
+
+    if guess_int == secret_int:
         return "Win", "🎉 Correct!"
 
-    if guess > secret:
+    if guess_int > secret_int:
         return "Too High", "📉 Go LOWER!"
     else:
         return "Too Low", "📈 Go HIGHER!"
