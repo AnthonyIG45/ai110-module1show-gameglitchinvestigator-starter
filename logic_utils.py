@@ -9,7 +9,6 @@ def get_range_for_difficulty(difficulty: str):
         return 1, 200
     return 1, 100
 
-
 def parse_guess(raw: str):
     if raw is None:
         return False, None, "Enter a guess."
@@ -38,7 +37,8 @@ def check_guess(guess, secret):
     else:
         return "Too Low", "📈 Go HIGHER!"
 
-#FIXME: Point logic doesnt make sense
+#FIXED: If a hint is followed by the inverse hint, scores nullify. If 2 of the same are followed by each other, score -5 each time.
+#EXAMPLE: "Go Higher" -5 then "Go Lower" +5 Total points = 0. "Go Higher" -5 then "Go Higher" -5 Total points = -10.
 
 def update_score(current_score: int, outcome: str, attempt_number: int, previous_outcome: str):
     if outcome == "Win":
