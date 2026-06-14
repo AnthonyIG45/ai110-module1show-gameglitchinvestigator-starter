@@ -1,3 +1,5 @@
+#FIIXED: Difficulty now makes sense
+
 def get_range_for_difficulty(difficulty: str):
     if difficulty == "Easy":
         return 1, 50
@@ -25,6 +27,7 @@ def parse_guess(raw: str):
 
     return True, value, None
 
+#FIXED: Logic now properly displays Higher or Lower
 
 def check_guess(guess, secret):
     if guess == secret:
@@ -35,6 +38,7 @@ def check_guess(guess, secret):
     else:
         return "Too Low", "📈 Go HIGHER!"
 
+#FIXME: Point logic doesnt make sense
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":

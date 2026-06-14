@@ -11,6 +11,8 @@ st.caption("An AI-generated guessing game. Something is off.")
 
 st.sidebar.header("Settings")
 
+#FIXME: Need to make logic properly adjust to amount of attempts and reset Secret and attempts used when changing settings
+
 difficulty = st.sidebar.selectbox(
     "Difficulty",
     ["Easy", "Normal", "Hard"],
@@ -63,18 +65,23 @@ raw_guess = st.text_input(
     key=f"guess_input_{difficulty}"
 )
 
-col1, col2, col3 = st.columns(3)
-with col1:
-    submit = st.button("Submit Guess 🚀")
-with col2:
-    new_game = st.button("New Game 🔁")
-with col3:
-    show_hint = st.checkbox("Show hint", value=True)
+with st.form (key = "game_panel", clear_on_submit=True):
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        submit = st.form_submit_button("Submit Guess 🚀")
+    with col2:
+        new_game = st.form_submit_button("New Game 🔁")
+    with col3:
+        show_hint = st.checkbox("Show hint", value=True)
+
+#FIXED: New game properly changes status back to "Playing" and allows input
 
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(1, 100)
     st.success("New game started.")
+    st.session_state.status = "playing"
     st.rerun()
 
 if st.session_state.status != "playing":
