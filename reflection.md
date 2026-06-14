@@ -14,6 +14,7 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
   + Does not restart the game when pressing "New Game".
   + The hints are backwards and don't really make sense.
   + Difficulty selection does not change secret number or change the guess parameters.
+  + Normal and Hard difficulty statistics were swapped.
   + Odd vs Even number of attempts remaining affects what type the secret number is being compared as (string - Int vs Int - Int).
   + logic_utils.py isn't properly imported into app.py.
 
@@ -38,7 +39,20 @@ Document at least 3 bugs you found. Add rows as needed.
   + and where bugs were located at.
 
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
+
+  + Attempts starts at 1, but New Game resets to 0 (app.py:96-97 vs app.py:135) — inconsistent initialization means the first game shows one fewer attempt than available.
+
+  + This was correct reviewing the code and on launch, it sets your attempt at 1, then pressing "New Game" would set attempt to 0 which was out of bounds for the play loop.
+
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
+
+  + At the top of app.py, add this import line:
+  + from logic_utils import get_range_for_difficulty, parse_guess, check_guess, update_score
+  + Then delete the 4 function definitions that are currently in app.py (lines 4–65), since they'll now live in logic_utils.py.
+  + The functions are in the same directory as app.py, so no path gymnastics needed — Python finds logic_utils.py automatically when you run from that folder.
+
+  + I verified that the refactoring does technically work, but it messes up the streamlit UI to include all of that code as a comment and text box at the top when running.
+  + It was partially true.
 
 ---
 
@@ -55,6 +69,9 @@ Document at least 3 bugs you found. Add rows as needed.
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
 
+  + Reruns essentially restarts certain logic in streamlit whereas states to refresh a given game or session activity. Like in a videogame, if you win a round and both teams switch sides.
+  + The teams maintain their score and their mid-game stats, but everyone is back alive and no one has any active streaks. This would be an example of a rerun. A session state would be
+  + like if you were playing the game, watching an end-match screen, sitting in lobby, or loading into a new match.
 ---
 
 ## 5. Looking ahead: your developer habits

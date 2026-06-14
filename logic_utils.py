@@ -40,19 +40,19 @@ def check_guess(guess, secret):
 
 #FIXME: Point logic doesnt make sense
 
-def update_score(current_score: int, outcome: str, attempt_number: int):
+def update_score(current_score: int, outcome: str, attempt_number: int, previous_outcome: str):
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
             points = 10
         return current_score + points
 
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
+    is_inverse = (outcome == "Too High" and previous_outcome == "Too Low") or (outcome == "Too Low" and previous_outcome == "Too High")
 
-    if outcome == "Too Low":
+    if is_inverse:
+        return current_score + 5
+    
+    if outcome in ["Too High", "Too Low"]:
         return current_score - 5
 
     return current_score
