@@ -43,14 +43,38 @@ def check_guess(guess, secret):
 #FIXED: If a hint is followed by the inverse hint, scores nullify. If 2 of the same are followed by each other, score -5 each time.
 #EXAMPLE: "Go Higher" -5 then "Go Lower" +5 Total points = 0. "Go Higher" -5 then "Go Higher" -5 Total points = -10.
 
-def update_score(current_score: int, outcome: str, attempt_number: int, previous_outcome: str):
+def update_score(
+    current_score: int, 
+    outcome: str, 
+    attempt_number: int, 
+    previous_outcome: str,
+    difficulty: str = "Normal"  # Added with a default to keep existing tests safe
+):
     if outcome == "Win":
+        # 1. Calculate the base points exactly like before
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
             points = 10
-        return current_score + points
+            
+        # 2. Define your multipliers for each difficulty setting
+        difficulty_multipliers = {
+            "Easy": 0.5,    # Halve the rewards for easy mode
+            "Normal": 1.0,   # Standard score scaling
+            "Hard": 2.0     # Double points for high stakes!
+        }
+        
+        # Grab the multiplier (fall back to 1.0 just in case)
+        multiplier = difficulty_multipliers.get(difficulty, 1.0)
+        
+        # 3. Apply the multiplier and cast to int so your score stays a clean whole number
+        final_winning_points = int(points * multiplier)
+        
+        return current_score + final_winning_points
 
-    is_inverse = (outcome == "Too High" and previous_outcome == "Too Low") or (outcome == "Too Low" and previous_outcome == "Too High")
+    # (The rest of your penalty/inverse logic remains completely unchanged)
+    is_inverse = (outcome == "Too High" and previous_outcome == "Too Low") or (
+        outcome == "Too Low" and previous_outcome == "Too High"
+    )
 
     if is_inverse:
         return current_score + 5

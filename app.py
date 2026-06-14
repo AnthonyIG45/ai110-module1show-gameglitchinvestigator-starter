@@ -127,6 +127,7 @@ if submit:
             outcome=outcome,
             attempt_number=st.session_state.attempts,
             previous_outcome=st.session_state.previous_outcome,
+            difficulty=difficulty,
         )
 
         st.session_state.previous_outcome = outcome

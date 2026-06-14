@@ -33,22 +33,29 @@ It wrote the code, ran away, and now the game is unplayable.
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+1. Game initiates defaulting to normal mode (7 attempts, secret number between 1-100)
+2. User enters 40
+3. Output is "Too Low", -5 points
+4. User enters 75
+5. Output is "Too High", +5 points
+6. User enters 62
+7. Outpit is "Win! The secret number was 62!"
+8. User is awarded 70 points (100 - (10 * (2 attempts) + 1))
+9. User presses "New Game" and a new number is generated and attempts are reset
+10. User changes difficulty to hard mode (5 attempts, secret number between 1-200, point gain multiplied because of difficulty)
 
 ## 🧪 Test Results
 
-```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
-```
+================================================================================================================================================ test session starts ================================================================================================================================================
+platform win32 -- Python 3.13.14, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Users\...\Code\CodePath\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.13.0
+collected 15 items                                                                                                                                                                                                                                                                                                   
+
+tests\test_game_logic.py ...............                                                                                                                                                                                                                                                                       [100%]
+
+================================================================================================================================================ 15 passed in 0.04s =================================================================================================================================================
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+- I added the st.form for the submission box for inputs. Easier on the user for submitting answers to then be able to submit their next choice.
